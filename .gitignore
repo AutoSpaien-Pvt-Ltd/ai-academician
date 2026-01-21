@@ -218,3 +218,11 @@ sessions/
 research_data/
 # User uploads
 uploads/
+
+# ======================================
+# Development History (Internal)
+# ======================================
+# Prompt history records (development logs)
+history/
+# Spec development checklists
+specs/*/checklists/

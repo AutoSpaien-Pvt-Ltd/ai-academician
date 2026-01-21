@@ -1,198 +1,246 @@
-# AI Academician
+<p align="center">
+  <h1 align="center">AI Academician</h1>
+  <p align="center">
+    <strong>Multi-Agent AI System for Academic Research Paper Generation</strong>
+  </p>
+  <p align="center">
+    <a href="https://github.com/AutoSpaien-Pvt-Ltd/ai-academician/blob/main/LICENSE"><img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="License: MIT"></a>
+    <a href="https://www.python.org/downloads/"><img src="https://img.shields.io/badge/Python-3.11+-green.svg" alt="Python 3.11+"></a>
+    <a href="https://github.com/AutoSpaien-Pvt-Ltd/ai-academician/issues"><img src="https://img.shields.io/github/issues/AutoSpaien-Pvt-Ltd/ai-academician" alt="Issues"></a>
+    <a href="https://github.com/AutoSpaien-Pvt-Ltd/ai-academician/stargazers"><img src="https://img.shields.io/github/stars/AutoSpaien-Pvt-Ltd/ai-academician" alt="Stars"></a>
+  </p>
+</p>
 
-A multi-agent research paper writing system that generates publication-ready academic papers using AI.
+---
 
-## Features
+Generate **publication-ready academic research papers** with an intelligent multi-agent system. AI Academician orchestrates 8 specialized AI agents to research, write, review, and format papers automatically.
 
-- **8 Specialized Agents** working collaboratively:
-  - **Research Agent**: User interaction, topic refinement, title formulation
-  - **Source Finder (Agent 1)**: Web and academic search using Google and arXiv
-  - **Summarizer (Agent 2)**: Content reading and detailed summarization
-  - **Planner (Agent 3)**: Research gap analysis and paper structure planning
-  - **Body Writer (Agent 4)**: Writes 15,000-22,000 word research body
-  - **Intro Writer (Agent 5)**: Introduction, conclusion, and abstract
-  - **Reviewer (Agent 6)**: Quality review with minimum 2 cycles
-  - **Editor (Agent 7)**: Edits based on reviewer feedback
+## Key Features
 
-- **Multiple LLM Support**: OpenAI GPT, Google Gemini, Anthropic Claude, HuggingFace models
-- **Academic Search**: Google Custom Search + arXiv integration
-- **Citation Styles**: APA, MLA, Chicago, IEEE, Harvard
-- **Export Formats**: PDF, Word (.docx), LaTeX
+| Feature | Description |
+|---------|-------------|
+| **8 Specialized Agents** | Collaborative AI agents for end-to-end paper generation |
+| **Multi-LLM Support** | OpenAI GPT-4, Google Gemini, Anthropic Claude, HuggingFace |
+| **Academic Search** | Google Custom Search + arXiv integration |
+| **5 Citation Styles** | APA, MLA, Chicago, IEEE, Harvard |
+| **3 Export Formats** | PDF, Word (.docx), LaTeX |
+| **Quality Assurance** | Minimum 2 review cycles before approval |
 
-## Installation
+## Agent Architecture
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                           AI ACADEMICIAN WORKFLOW                            │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                              │
+│   User Input                                                                 │
+│       │                                                                      │
+│       ▼                                                                      │
+│   ┌──────────────┐    ┌──────────────┐    ┌──────────────┐                  │
+│   │   Research   │───▶│    Source    │───▶│  Summarizer  │                  │
+│   │    Agent     │    │    Finder    │    │   (Agent 2)  │                  │
+│   └──────────────┘    │   (Agent 1)  │    └──────────────┘                  │
+│                       └──────────────┘            │                          │
+│                                                   ▼                          │
+│   ┌──────────────┐    ┌──────────────┐    ┌──────────────┐                  │
+│   │    Editor    │◀───│   Reviewer   │◀───│   Planner    │                  │
+│   │   (Agent 7)  │    │   (Agent 6)  │    │   (Agent 3)  │                  │
+│   └──────────────┘    └──────────────┘    └──────────────┘                  │
+│          │                   ▲                    │                          │
+│          │            ┌──────┴──────┐             ▼                          │
+│          │            │ Review Loop │    ┌──────────────┐                   │
+│          │            │  (min 2x)   │    │ Body Writer  │                   │
+│          │            └─────────────┘    │   (Agent 4)  │                   │
+│          │                   ▲           └──────────────┘                   │
+│          │                   │                    │                          │
+│          ▼                   │                    ▼                          │
+│   ┌──────────────┐           │           ┌──────────────┐                   │
+│   │    Export    │           └───────────│ Intro Writer │                   │
+│   │  PDF/DOCX/   │                       │   (Agent 5)  │                   │
+│   │    LaTeX     │                       └──────────────┘                   │
+│   └──────────────┘                                                          │
+│                                                                              │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+### Agent Responsibilities
+
+| Agent | Role | Output |
+|-------|------|--------|
+| **Research Agent** | User interaction, topic refinement | Refined research topic & title |
+| **Source Finder** | Web & academic search (Google + arXiv) | 20-30 credible sources |
+| **Summarizer** | Content analysis & summarization | Detailed source summaries |
+| **Planner** | Research gap analysis & structure | Paper outline & methodology |
+| **Body Writer** | Core research content | 15,000-22,000 words |
+| **Intro Writer** | Introduction, conclusion, abstract | Complete paper framing |
+| **Reviewer** | Quality assurance (min 2 cycles) | Feedback & improvement areas |
+| **Editor** | Content refinement | Publication-ready paper |
+
+## Quick Start
+
+### Installation
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/ai-academician.git
+git clone https://github.com/AutoSpaien-Pvt-Ltd/ai-academician.git
 cd ai-academician
 
 # Create virtual environment
 python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
+source venv/bin/activate  # Windows: venv\Scripts\activate
 
-# Install dependencies
+# Install package
 pip install -e .
-
-# For development
-pip install -e ".[dev]"
 ```
 
-## Configuration
+### Configuration
 
-1. Copy the example environment file:
 ```bash
+# Copy environment template
 cp .env.example .env
 ```
 
-2. Fill in your API keys in `.env`:
+Edit `.env` with your API keys:
+
 ```env
-# Required: At least one LLM provider
-GOOGLE_API_KEY=your_google_api_key
-ANTHROPIC_API_KEY=your_anthropic_api_key
-OPENAI_API_KEY=your_openai_api_key
+# LLM Providers (at least one required)
+OPENAI_API_KEY=your_openai_key
+GOOGLE_API_KEY=your_google_key
+ANTHROPIC_API_KEY=your_anthropic_key
 
-# Required for search
-GOOGLE_CSE_ID=your_google_custom_search_engine_id
+# Search (required)
+GOOGLE_CSE_ID=your_search_engine_id
 
-# Optional
-HUGGINGFACE_API_KEY=your_huggingface_api_key
+# Defaults
 DEFAULT_LLM_PROVIDER=gemini
+DEFAULT_CITATION_STYLE=APA
 ```
 
-## Usage
-
-### Interactive Mode
+### Generate a Paper
 
 ```bash
+# Interactive mode (recommended)
 ai-academician generate -i
+
+# Direct generation
+ai-academician generate -t "Impact of Artificial Intelligence on Healthcare Diagnostics"
+
+# With options
+ai-academician generate \
+  -t "Machine Learning in Finance" \
+  -s APA \
+  -w 20000 \
+  -f pdf -f docx -f latex
 ```
 
-### Command Line
-
-```bash
-# Generate a paper with default settings
-ai-academician generate -t "Impact of AI on Healthcare Diagnostics"
-
-# Specify citation style and word count
-ai-academician generate -t "Machine Learning in Finance" -s APA -w 20000
-
-# Export to all formats
-ai-academician generate -t "Climate Change Effects" -f pdf -f docx -f latex
-
-# With custom output directory
-ai-academician generate -t "Your Topic" -o ./my_papers
-```
-
-### Options
+## CLI Reference
 
 | Option | Short | Description | Default |
 |--------|-------|-------------|---------|
 | `--topic` | `-t` | Research topic | Required |
-| `--style` | `-s` | Citation style (APA, MLA, Chicago, IEEE, Harvard) | APA |
-| `--words` | `-w` | Target word count | 18000 |
+| `--style` | `-s` | Citation style (APA/MLA/Chicago/IEEE/Harvard) | APA |
+| `--words` | `-w` | Target word count | 18,000 |
 | `--output` | `-o` | Output directory | ./output |
 | `--format` | `-f` | Export format (can use multiple) | pdf, docx |
 | `--interactive` | `-i` | Interactive mode | False |
 | `--debug` | | Enable debug logging | False |
 
-### Other Commands
+## Supported LLM Providers
 
-```bash
-# Show configuration
-ai-academician config
-
-# Show version
-ai-academician version
-```
+| Provider | Models | Best For |
+|----------|--------|----------|
+| **OpenAI** | GPT-4, GPT-4 Turbo | High-quality generation |
+| **Google Gemini** | Gemini Pro | Cost-effective, fast |
+| **Anthropic Claude** | Claude 3 Opus/Sonnet | Long-form content |
+| **HuggingFace** | Mixtral, Llama | Open-source alternative |
 
 ## Project Structure
 
 ```
 ai-academician/
 ├── src/
-│   ├── agents/           # 8 specialized agents
+│   ├── agents/           # 8 specialized AI agents
 │   ├── llm/              # LLM provider implementations
-│   ├── search/           # Search API integrations
+│   ├── search/           # Google & arXiv integrations
+│   ├── citations/        # APA, MLA, Chicago, IEEE, Harvard
+│   ├── export/           # PDF, DOCX, LaTeX exporters
 │   ├── models/           # Data models
-│   ├── export/           # PDF, Word, LaTeX exporters
-│   ├── citations/        # Citation formatters
-│   ├── storage/          # Database and file management
-│   ├── utils/            # Utilities
-│   ├── config.py         # Configuration
-│   ├── orchestrator.py   # Agent orchestration
+│   ├── storage/          # SQLite & file management
+│   ├── utils/            # Utilities & helpers
+│   ├── config.py         # Configuration management
+│   ├── orchestrator.py   # Agent coordination
 │   └── main.py           # CLI entry point
-├── tests/
-├── specs/                # Feature specifications
-├── pyproject.toml
-├── .env.example
+├── tests/                # Test suite
+├── .env.example          # Environment template
+├── pyproject.toml        # Project configuration
 └── README.md
-```
-
-## Agent Workflow
-
-```
-User Input → Research Agent → Source Finder → Summarizer → Planner
-                                                              ↓
-Export ← Source Finder ← Editor ← Reviewer ← Intro Writer ← Body Writer
-         (format review)    ↑________↓
-                         (review loop)
 ```
 
 ## Development
 
-### Running Tests
-
 ```bash
+# Install dev dependencies
+pip install -e ".[dev]"
+
+# Run tests
 pytest
-pytest --cov=src  # With coverage
-```
 
-### Code Quality
+# Run with coverage
+pytest --cov=src
 
-```bash
-# Format code
-black src tests
-
-# Lint
-ruff check src tests
-
-# Type check
-mypy src
+# Code quality
+black src tests        # Format
+ruff check src tests   # Lint
+mypy src               # Type check
 ```
 
 ## API Keys Setup
 
-### Google Custom Search
+<details>
+<summary><b>Google Custom Search</b></summary>
+
 1. Go to [Google Cloud Console](https://console.cloud.google.com/)
-2. Create a new project or select existing
-3. Enable the Custom Search API
-4. Create credentials (API Key)
-5. Go to [Programmable Search Engine](https://programmablesearchengine.google.com/)
-6. Create a search engine
-7. Get your Search Engine ID (cx)
+2. Create a project and enable Custom Search API
+3. Create credentials (API Key)
+4. Go to [Programmable Search Engine](https://programmablesearchengine.google.com/)
+5. Create a search engine and get the Search Engine ID
+</details>
 
-### LLM Providers
-- **OpenAI**: Get API key from [OpenAI Platform](https://platform.openai.com/)
-- **Google Gemini**: Get API key from [Google AI Studio](https://makersuite.google.com/)
-- **Anthropic Claude**: Get API key from [Anthropic Console](https://console.anthropic.com/)
-- **HuggingFace**: Get API key from [HuggingFace Settings](https://huggingface.co/settings/tokens)
+<details>
+<summary><b>LLM Providers</b></summary>
 
-## License
-
-MIT License
+- **OpenAI**: [platform.openai.com](https://platform.openai.com/)
+- **Google Gemini**: [makersuite.google.com](https://makersuite.google.com/)
+- **Anthropic Claude**: [console.anthropic.com](https://console.anthropic.com/)
+- **HuggingFace**: [huggingface.co/settings/tokens](https://huggingface.co/settings/tokens)
+</details>
 
 ## Contributing
 
+We welcome contributions! Please see our [Contributing Guidelines](CONTRIBUTING.md) for details.
+
 1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Run tests
-5. Submit a pull request
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'feat: add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## Security
+
+For security concerns, please see our [Security Policy](SECURITY.md).
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## Acknowledgments
 
 Built with:
-- [OpenAI Agents SDK](https://github.com/openai/openai-agents-sdk)
-- [Google Generative AI](https://ai.google.dev/)
-- [Anthropic Claude](https://www.anthropic.com/)
-- [arXiv API](https://arxiv.org/help/api/)
+- [OpenAI](https://openai.com/) | [Google AI](https://ai.google.dev/) | [Anthropic](https://www.anthropic.com/)
+- [arXiv API](https://arxiv.org/help/api/) | [Google Custom Search](https://developers.google.com/custom-search)
+
+---
+
+<p align="center">
+  <sub>Built with passion by <a href="https://autospaien.com">AutoSpaien Pvt Ltd</a></sub>
+</p>
