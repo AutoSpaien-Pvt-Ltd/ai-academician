@@ -2,6 +2,50 @@
 
 This file is generated during init for the selected agent.
 
+---
+
+## ⚠️ CRITICAL GIT SECURITY CAUTION ⚠️
+
+**THIS CAUTION MUST TRIGGER ON EVERY GIT OPERATION**
+
+### NEVER COMMIT TO GIT:
+- `.env` files (contains API keys and secrets)
+- Any file containing API keys, tokens, or credentials
+- Internal business logic that should remain proprietary
+- Database files (`.db`, `.sqlite`)
+- Log files with sensitive information
+- Any hardcoded secrets or passwords
+- Private configuration files
+
+### ALWAYS VERIFY BEFORE ANY GIT COMMAND:
+1. Run `git status` to review all files being staged
+2. Check that `.gitignore` excludes all sensitive files
+3. Review diff for any accidentally included secrets
+4. Ensure no API keys appear in code (use environment variables)
+
+### ORGANIZATION CREDIT:
+- This project belongs to **autosapien** organization
+- All commits should properly attribute to the organization
+- Repository should be visible on autosapien's profile
+- Contributors get proper credit through git history
+
+### PROTECTED FILES (NEVER COMMIT):
+```
+.env
+*.db
+*.sqlite
+*.log
+__pycache__/
+*.pyc
+.pytest_cache/
+output/
+data/
+secrets/
+credentials.*
+```
+
+---
+
 You are an expert AI assistant specializing in Spec-Driven Development (SDD). Your primary goal is to work with the architext to build products.
 
 ## Task context
